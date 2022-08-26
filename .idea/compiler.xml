@@ -8,6 +8,11 @@
       <module name="Music.app" target="11" />
       <module name="Music.buildSrc" target="11" />
       <module name="Music.data" target="11" />
+      <module name="NumbersTestTask.app" target="11" />
+      <module name="numbersTestTask.buildSrc" target="11" />
+      <module name="numbersTestTask.buildSrc.main" target="11" />
+      <module name="numbersTestTask.buildSrc.test" target="11" />
+      <module name="NumbersTestTask.data" target="11" />
       <module name="Template.app" target="11" />
       <module name="Template.buildSrc" target="11" />
       <module name="Template.buildSrc.main" target="11" />

@@ -9,7 +9,7 @@ android {
     buildToolsVersion = Dependencies.android.buildTools
 
     defaultConfig {
-        applicationId = "com.alacrity.music"
+        applicationId = "com.alacrity.numberTestTask"
         minSdk = Android.minSdk
         targetSdk = Android.targetSdk
         versionCode = 1
@@ -51,6 +51,7 @@ dependencies {
     room()
     async()
     jetpack()
+    retrofit()
     imageLoading()
 }
 
@@ -98,5 +99,12 @@ fun DependencyHandlerScope.jetpack() {
     implementation(Dependencies.compose.activity)
     implementation(Dependencies.compose.navigation)
     implementation(Dependencies.compose.uiController)
+}
+
+fun DependencyHandlerScope.retrofit() {
+    implementation(Dependencies.retrofit.retrofit)
+    implementation(Dependencies.retrofit.gson)
+    implementation(Dependencies.retrofit.gsonConverter)
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
 }
 

@@ -22,14 +22,14 @@ object Versions {
 
     // di
     const val javaxInject = "1"
-    const val dagger = "2.42"
-    const val daggerCompiler = "2.42"
+    const val dagger = "2.43.2"
+    const val daggerCompiler = "2.43.2"
 
     // logging
     const val timber = "5.0.1"
 
     // room
-    const val room = "2.4.2"
+    const val room = "2.4.3"
 
     // other
     const val glide = "1.5.2"

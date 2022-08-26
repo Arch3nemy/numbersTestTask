@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("kotlin-android")
+    kotlin("kapt")
 }
 
 android {
@@ -33,4 +34,22 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    log()
+    room()
+    retrofit()
+}
+
+fun DependencyHandlerScope.retrofit() {
+    implementation(Dependencies.retrofit.retrofit)
+    implementation(Dependencies.retrofit.gson)
+}
+
+fun DependencyHandlerScope.room() {
+    implementation(Dependencies.room.runtime)
+    kapt(Dependencies.room.compiler)
+    implementation(Dependencies.room.ktx)
+}
+
+fun DependencyHandlerScope.log() {
+    implementation(Dependencies.other.timber)
 }
