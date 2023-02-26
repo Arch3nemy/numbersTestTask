@@ -22,4 +22,5 @@ object Other {
 
     const val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
 
+    const val scalarConverter = "com.squareup.retrofit2:converter-scalars:${Versions.scalarConverter}"
 }

@@ -10,7 +10,6 @@ import dagger.Provides
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import javax.inject.Singleton
 
@@ -37,13 +36,11 @@ class ApiModule(private val url: String) {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .addConverterFactory(ScalarsConverterFactory.create())
             .baseUrl(url)
+            .addConverterFactory(ScalarsConverterFactory.create())
             .client(okHttpClient)
             .build()
     }
-
     @Singleton
     @Provides
     fun provideApi(retrofit: Retrofit): Api {
@@ -56,12 +53,6 @@ class ApiModule(private val url: String) {
         val clientBuilder = OkHttpClient.Builder()
             .followRedirects(false)
         return clientBuilder.build()
-    }
-
-
-    companion object {
-        const val CONNECT_TIMEOUT = 120L
-        const val READ_TIMEOUT = 120L
     }
 
 }

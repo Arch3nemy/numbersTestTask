@@ -44,15 +44,16 @@ fun TopSection(
     val focusManager = LocalFocusManager.current
     val interactionSource = remember { MutableInteractionSource() }
 
-    Column(modifier = modifier
-        .fillMaxSize()
-        .clickable(
-            interactionSource = interactionSource,
-            indication = null
-        ) {
-            keyboardController?.hide()
-            focusManager.clearFocus(true)
-        }, verticalArrangement = Arrangement.SpaceAround
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) {
+                keyboardController?.hide()
+                focusManager.clearFocus(true)
+            }, verticalArrangement = Arrangement.SpaceAround
     ) {
         Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Center) {
             TextField(
@@ -99,7 +100,12 @@ fun TopSection(
 }
 
 @Composable
-fun BottomSection(modifier: Modifier, list: List<NumberWithFact>, onItemClick: (NumberWithFact) -> Unit, onLongItemClick: (NumberWithFact) -> Unit) {
+fun BottomSection(
+    modifier: Modifier,
+    list: List<NumberWithFact>,
+    onItemClick: (NumberWithFact) -> Unit,
+    onLongItemClick: (NumberWithFact) -> Unit
+) {
     Box(modifier = modifier.fillMaxSize()) {
         LazyColumn {
             items(list) { item ->
@@ -120,7 +126,8 @@ fun RowItem(item: NumberWithFact, onItemClick: () -> Unit, onLongItemClick: () -
             .height(58.dp)
     ) {
         Card(
-            modifier = Modifier.padding(3.dp)
+            modifier = Modifier
+                .padding(3.dp)
                 .fillMaxSize()
                 .combinedClickable(
                     onClick = { onItemClick() },
@@ -129,7 +136,8 @@ fun RowItem(item: NumberWithFact, onItemClick: () -> Unit, onLongItemClick: () -
             shape = RoundedCornerShape(10.dp),
             elevation = 2.dp,
         ) {
-            Text(text = item.fact,
+            Text(
+                text = item.fact,
                 style = NumberTestTaskTypography.h3,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
@@ -137,27 +145,37 @@ fun RowItem(item: NumberWithFact, onItemClick: () -> Unit, onLongItemClick: () -
                     .fillMaxSize()
                     .background(DarkerGray)
                     .align(CenterVertically)
-                    .padding(start = 10.dp, end = 10.dp))
+                    .padding(start = 10.dp, end = 10.dp)
+            )
         }
     }
 }
 
 @Composable
-fun TopSection(number: Int, onBackPressed: () -> Unit) {
+fun RowWithBackButton(onBackPressed: () -> Unit) {
+    val sectionHeight = getScreenSize<Float>().first / 5
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(sectionHeight.dp), verticalAlignment = Alignment.Top
+    ) {
+        IconButton(onClick = { onBackPressed() }) {
+            Icon(
+                imageVector = Icons.Filled.ArrowBack,
+                contentDescription = "null"
+            )
+        }
+    }
+}
+
+@Composable
+fun TopSection(number: Int) {
     val sectionHeight = getScreenSize<Float>().first / 5
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(sectionHeight.dp)
     ) {
-        Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
-            IconButton(onClick = { onBackPressed() }) {
-                Icon(
-                    imageVector = Icons.Filled.ArrowBack,
-                    contentDescription = "null"
-                )
-            }
-        }
         Box(
             modifier = Modifier.fillMaxWidth(), contentAlignment = Center
         ) {
@@ -176,7 +194,8 @@ fun BottomSection(fact: String) {
         contentAlignment = TopCenter
     ) {
         Card(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(1.dp),
             shape = RoundedCornerShape(10.dp),
             elevation = 5.dp,
@@ -185,7 +204,8 @@ fun BottomSection(fact: String) {
             Text(
                 modifier = Modifier.padding(start = 10.dp, end = 10.dp, top = 5.dp),
                 text = fact,
-                style = NumberTestTaskTypography.h1)
+                style = NumberTestTaskTypography.h1
+            )
         }
     }
 }

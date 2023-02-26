@@ -2,7 +2,6 @@ package com.alacrity.numbersTestTask.ui.main
 
 import com.alacrity.numbersTestTask.entity.NumberWithFact
 import com.alacrity.numbersTestTask.room.entity.NumberWithFactTableItem
-import com.alacrity.numbersTestTask.room.entity.toRawItems
 import com.alacrity.numbersTestTask.ui.main.models.MainEvent
 import com.alacrity.numbersTestTask.use_cases.*
 import com.alacrity.numbersTestTask.util.BaseViewModel
@@ -21,8 +20,12 @@ class MainViewModel @Inject constructor(
 
     val viewState: StateFlow<MainViewState> = _viewState
 
-    val savedNumbersWithFactsState: MutableSharedFlow<MutableList<NumberWithFact>> =
+    private val _savedNumbersWithFactsState: MutableSharedFlow<List<NumberWithFact>> =
         MutableSharedFlow()
+
+    val savedNumbersWithFactsState: SharedFlow<List<NumberWithFact>> =
+        _savedNumbersWithFactsState
+
 
     private val list = mutableSetOf<NumberWithFact>()
 
@@ -41,6 +44,7 @@ class MainViewModel @Inject constructor(
             is Error -> currentState.reduce(event)
             is FinishedLoading -> currentState.reduce(event)
             is NumberDetails -> currentState.reduce(event)
+            else -> Unit
         }
     }
 
@@ -108,7 +112,7 @@ class MainViewModel @Inject constructor(
     private fun doThenEmitChanges(block: () -> Unit) {
         launch {
             block()
-            savedNumbersWithFactsState.emit(list.toMutableList())
+            _savedNumbersWithFactsState.emit(list.toMutableList())
         }
 
     }
@@ -149,7 +153,7 @@ class MainViewModel @Inject constructor(
                 _viewState.value = Error(it)
             }
         ) {
-            savedNumbersWithFactsState.emit(items.toRawItems())
+            _savedNumbersWithFactsState.emit(items.map { NumberWithFact(it.uid, it.number, it.fact) })
         }
     }
 

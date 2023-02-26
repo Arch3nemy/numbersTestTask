@@ -42,7 +42,10 @@ dependencies {
 fun DependencyHandlerScope.retrofit() {
     implementation(Dependencies.retrofit.retrofit)
     implementation(Dependencies.retrofit.gson)
+    implementation(Dependencies.retrofit.gsonConverter)
+    implementation(Dependencies.other.scalarConverter)
 }
+
 
 fun DependencyHandlerScope.room() {
     implementation(Dependencies.room.runtime)

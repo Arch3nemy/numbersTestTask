@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alacrity.numbersTestTask.BaseEvent
 import com.alacrity.numbersTestTask.EventHandler
-import com.alacrity.numbersTestTask.exceptions.NumberTestTaskException
 import com.alacrity.numbersTestTask.view_states.BaseViewState
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow

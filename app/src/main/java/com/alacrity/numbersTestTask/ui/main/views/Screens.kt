@@ -44,10 +44,13 @@ fun FirstScreen(
 
 @Composable
 fun SecondScreen(numberWithFact: NumberWithFact, onBackPressed: () -> Unit) {
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(BrightGray)) {
-        TopSection(number = numberWithFact.number, onBackPressed = { onBackPressed() })
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(BrightGray)
+    ) {
+        RowWithBackButton(onBackPressed)
+        numberWithFact.number?.let { TopSection(number = it) }
         BottomSection(fact = numberWithFact.fact)
     }
     BackHandler {

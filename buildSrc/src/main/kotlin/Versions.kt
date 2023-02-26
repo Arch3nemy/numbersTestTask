@@ -42,4 +42,6 @@ object Versions {
 
     const val okHttp = "4.9.0"
 
+    const val scalarConverter = "2.5.0"
+
 }

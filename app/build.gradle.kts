@@ -19,7 +19,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"http://numbersapi.com/\"")
+        }
         release {
+            buildConfigField("String", "BASE_URL", "\"http://numbersapi.com/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -60,6 +64,7 @@ fun DependencyHandlerScope.core() {
     implementation(Dependencies.other.ktxCore)
     implementation(Dependencies.other.appcompat)
     implementation(Dependencies.other.material)
+    implementation(Dependencies.other.scalarConverter)
 }
 
 fun DependencyHandlerScope.room() {
@@ -105,6 +110,5 @@ fun DependencyHandlerScope.retrofit() {
     implementation(Dependencies.retrofit.retrofit)
     implementation(Dependencies.retrofit.gson)
     implementation(Dependencies.retrofit.gsonConverter)
-    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
 }
 

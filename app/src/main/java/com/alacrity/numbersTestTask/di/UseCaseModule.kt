@@ -10,18 +10,14 @@ import javax.inject.Singleton
 interface UseCaseModule {
 
     @Binds
-    @Singleton
     fun bindGetFactAboutNumberUseCaseImpl(impl: GetFactAboutNumberUseCaseImpl): GetFactAboutNumberUseCase
 
     @Binds
-    @Singleton
     fun bindSaveItemToDatabaseUseCaseImpl(impl: SaveItemToDatabaseUseCaseImpl): SaveItemToDatabaseUseCase
 
     @Binds
-    @Singleton
     fun bindGetItemsFromDatabaseUseCaseImpl(impl: GetItemsFromDatabaseUseCaseImpl): GetItemsFromDatabaseUseCase
 
     @Binds
-    @Singleton
     fun bindRemoveItemFromDatabaseUseCase(impl: RemoveItemFromDatabaseUseCaseImpl): RemoveItemFromDatabaseUseCase
 }

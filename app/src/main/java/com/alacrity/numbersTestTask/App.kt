@@ -21,7 +21,7 @@ class App : Application() {
 
         appComponent = DaggerAppComponent
             .builder()
-            .apiModule(ApiModule("http://numbersapi.com/"))
+            .apiModule(ApiModule(BuildConfig.BASE_URL))
             .appModule(AppModule(this))
             .build()
             .apply { inject(this@App) }
