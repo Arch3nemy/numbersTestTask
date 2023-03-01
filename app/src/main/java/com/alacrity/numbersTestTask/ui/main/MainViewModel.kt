@@ -1,14 +1,17 @@
 package com.alacrity.numbersTestTask.ui.main
 
 import com.alacrity.numbersTestTask.entity.NumberWithFact
-import com.alacrity.numbersTestTask.room.entity.NumberWithFactTableItem
 import com.alacrity.numbersTestTask.ui.main.models.MainEvent
-import com.alacrity.numbersTestTask.use_cases.*
+import com.alacrity.numbersTestTask.use_cases.GetFactAboutNumberUseCase
+import com.alacrity.numbersTestTask.use_cases.GetItemsFromDatabaseUseCase
+import com.alacrity.numbersTestTask.use_cases.RemoveItemFromDatabaseUseCase
+import com.alacrity.numbersTestTask.use_cases.SaveItemToDatabaseUseCase
 import com.alacrity.numbersTestTask.util.BaseViewModel
-import com.alacrity.numbersTestTask.utils.toTableItems
 import com.alacrity.numbersTestTask.view_states.MainViewState
 import com.alacrity.numbersTestTask.view_states.MainViewState.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
@@ -138,11 +141,11 @@ class MainViewModel @Inject constructor(
             logSuccess = "Successfully saved item to db",
         ) {
             val items = getItemsFromDatabaseUseCase()
-            emitItems(items.toTableItems())
+            emitItems(items)
         }
     }
 
-    private fun emitItems(items: List<NumberWithFactTableItem>) {
+    private fun emitItems(items: List<NumberWithFact>) {
         launch(
             logSuccess = "Successfully emitted items to shared flow",
             logError = "Error emitting items to shared flow",
@@ -153,7 +156,7 @@ class MainViewModel @Inject constructor(
                 _viewState.value = Error(it)
             }
         ) {
-            _savedNumbersWithFactsState.emit(items.map { NumberWithFact(it.uid, it.number, it.fact) })
+            _savedNumbersWithFactsState.emit(items)
         }
     }
 

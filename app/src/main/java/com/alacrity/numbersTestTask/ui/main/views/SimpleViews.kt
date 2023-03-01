@@ -24,10 +24,13 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.alacrity.numbersTestTask.R
 import com.alacrity.numbersTestTask.entity.NumberWithFact
 import com.alacrity.numbersTestTask.theme.*
 import com.alacrity.numbersTestTask.util.getScreenSize
@@ -78,7 +81,7 @@ fun TopSection(
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = { keyboardController?.hide() }),
-                label = { Text("Enter number") }
+                label = { Text(stringResource(R.string.enter_number)) }
             )
         }
 
@@ -88,12 +91,12 @@ fun TopSection(
                 onClick = {
                     if (text.isNotEmpty()) onGetFactClicked(text.toInt())
                 }) {
-                Text(text = "Get fact")
+                Text(text = stringResource(R.string.get_fact))
             }
             Button(
                 colors = ButtonDefaults.buttonColors(backgroundColor = Purple),
                 onClick = { onGetRandomFactClicked() }) {
-                Text(text = "Get random fact")
+                Text(text = stringResource(R.string.get_random_fact))
             }
         }
     }
@@ -162,7 +165,7 @@ fun RowWithBackButton(onBackPressed: () -> Unit) {
         IconButton(onClick = { onBackPressed() }) {
             Icon(
                 imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "null"
+                contentDescription = stringResource(R.string.back_button)
             )
         }
     }
@@ -207,5 +210,16 @@ fun BottomSection(fact: String) {
                 style = NumberTestTaskTypography.h1
             )
         }
+    }
+}
+
+@Composable
+fun ErrorView(exception: Throwable? = null) {
+    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Center) {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(R.string.error_occured, exception.toString()),
+            textAlign = TextAlign.Center
+        )
     }
 }

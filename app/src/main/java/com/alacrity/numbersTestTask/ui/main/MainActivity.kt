@@ -16,7 +16,7 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         App.appComponent.inject(this)
         setContent {
-            NumbersTestTaskApp(context = this, homeViewModel = mainViewModel)
+            NumbersTestTaskApp(homeViewModel = mainViewModel)
         }
     }
 

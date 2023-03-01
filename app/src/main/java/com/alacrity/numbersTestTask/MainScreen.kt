@@ -8,10 +8,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.alacrity.numbersTestTask.ui.main.MainViewModel
 import com.alacrity.numbersTestTask.ui.main.models.*
+import com.alacrity.numbersTestTask.ui.main.views.ErrorView
 import com.alacrity.numbersTestTask.ui.main.views.FirstScreen
 import com.alacrity.numbersTestTask.ui.main.views.SecondScreen
 import com.alacrity.numbersTestTask.view_states.MainViewState
 
+/**
+ * Since both first and second screens don't have that much of responsibilities, navigation
+ * is not needed and Main Screen can be responsible for everything. For navigation samples check Random Users project.
+ */
 @Composable
 fun MainScreen(
     viewModel: MainViewModel,
@@ -50,7 +55,7 @@ fun MainScreen(
         }
 
         is MainViewState.Error -> {
-            /* ShowErrorView */
+            ErrorView((state as MainViewState.Error).exception)
         }
 
         else -> Unit

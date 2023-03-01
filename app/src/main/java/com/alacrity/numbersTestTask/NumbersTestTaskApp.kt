@@ -1,16 +1,9 @@
 package com.alacrity.numbersTestTask
 
-import android.content.Context
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import com.alacrity.numbersTestTask.theme.AppTheme
 import com.alacrity.numbersTestTask.ui.main.MainViewModel
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -21,7 +14,6 @@ object Destinations {
 
 @Composable
 fun NumbersTestTaskApp(
-    context: Context,
     homeViewModel: MainViewModel
 ) {
     AppTheme {
@@ -32,21 +24,9 @@ fun NumbersTestTaskApp(
             }
 
             AppNavGraph(
-                context = context,
                 homeViewModel = homeViewModel,
             )
         }
 
-}
-
-
-fun customShape(screenWidth: Float, screenHeight: Float) = object : Shape {
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        return Outline.Rectangle(Rect(0f, 0f, screenWidth / 5, screenHeight))
-    }
 }
 
